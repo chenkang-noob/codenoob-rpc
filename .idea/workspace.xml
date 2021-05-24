@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e5cfad6-8ffe-4bdd-9e1b-41c59c9f9f36" name="Default Changelist" comment="" />
+    <list default="true" id="9e5cfad6-8ffe-4bdd-9e1b-41c59c9f9f36" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +15,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -34,6 +39,7 @@
     <option name="vmOptions" value="-DarchetypeCatalog=local" />
   </component>
   <component name="ProjectId" id="1syB4UrXrAWnxbzm5D4XahHYrOg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -55,7 +61,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1621834757472</updated>
-      <workItem from="1621834762144" duration="1884000" />
+      <workItem from="1621834762144" duration="2150000" />
     </task>
     <servers />
   </component>
