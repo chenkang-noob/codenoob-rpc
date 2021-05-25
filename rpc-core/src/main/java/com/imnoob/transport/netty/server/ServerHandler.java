@@ -1,15 +1,16 @@
 package com.imnoob.transport.netty.server;
 
+import com.imnoob.transport.netty.model.RpcRequest;
+import com.imnoob.transport.netty.model.RpcResponse;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
-import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ServerHandler extends SimpleChannelInboundHandler<String> {
+public class ServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
 
     private static final Logger logger = LoggerFactory.getLogger(ServerHandler.class);
 
@@ -34,11 +35,15 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, String s) throws Exception {
-        logger.info("接收到客户端消息:"+s);
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcRequest request) throws Exception {
+        logger.info("接收到客户端请求:"+request.getRequestId());
         if (channelHandlerContext.channel().isActive() && channelHandlerContext.channel().isWritable()) {
-//            channelHandlerContext.writeAndFlush(Unpooled.copiedBuffer("i get it", CharsetUtil.UTF_8));
-            channelHandlerContext.writeAndFlush("i get it");
+//            channelHandlerContext.writeAndFlush("i get it");
+            RpcResponse<String> response = new RpcResponse<>();
+            response.setRequestId(request.getRequestId());
+            response.setMessage("OK");
+            response.setData("i get it");
+            channelHandlerContext.writeAndFlush(response);
         } else {
             logger.error("通道不可写");
         }

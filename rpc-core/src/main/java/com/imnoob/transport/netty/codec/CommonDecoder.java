@@ -1,6 +1,7 @@
 package com.imnoob.transport.netty.codec;
 
 import com.imnoob.transport.netty.constant.RpcConstant;
+import com.imnoob.transport.netty.enums.PackageType;
 import com.imnoob.transport.netty.model.RpcRequest;
 import com.imnoob.transport.netty.model.RpcResponse;
 import com.imnoob.transport.netty.serializer.CommonSerializer;
@@ -30,7 +31,7 @@ public class CommonDecoder extends ReplayingDecoder<Void> {
         CommonSerializer serializer = CommonSerializer.getSerializer(serial_type);
 
         Class<?> clazz ;
-        if (package_type == 1){
+        if (package_type == PackageType.RPC_REQUEST.getCode()){
             clazz = RpcRequest.class;
         }else{
             clazz = RpcResponse.class;

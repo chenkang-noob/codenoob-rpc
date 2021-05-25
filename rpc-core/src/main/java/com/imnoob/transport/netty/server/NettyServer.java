@@ -1,5 +1,8 @@
 package com.imnoob.transport.netty.server;
 
+import com.imnoob.transport.netty.codec.CommonDecoder;
+import com.imnoob.transport.netty.codec.CommonEncoder;
+import com.imnoob.transport.netty.serializer.JsonSerializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -53,8 +56,8 @@ public class NettyServer {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline();
-                        pipeline.addLast("decoder",new StringDecoder());
-                        pipeline.addLast("encoder",new StringEncoder());
+                        pipeline.addLast("decoder",new CommonDecoder());
+                        pipeline.addLast("encoder",new CommonEncoder(new JsonSerializer()));
                         pipeline.addLast(new ServerHandler());
                         //坑： netty handler的执行顺序
                     }

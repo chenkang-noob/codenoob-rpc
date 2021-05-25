@@ -1,6 +1,8 @@
 package com.imnoob.transport.netty.serializer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.imnoob.transport.netty.enums.CustomizeException;
+import com.imnoob.transport.netty.exception.SeriException;
 import com.imnoob.transport.netty.model.RpcRequest;
 
 import java.io.IOException;
@@ -18,14 +20,14 @@ public interface CommonSerializer {
         else if (code == 2) return null;
         else if (code == 3) return null;
         else
-            return null; //TODO 抛出异常
+            throw new SeriException(CustomizeException.NOT_FOUND_SERIALIZER_TYPE); //TODO 抛出异常
     }
 
 
 
-    public byte[] serializer(Object obj);
+     byte[] serializer(Object obj);
 
-    public Object deserialize(byte[] bytes, Class<?> clazz);
+     Object deserialize(byte[] bytes, Class<?> clazz);
 
     int getCode();
 }

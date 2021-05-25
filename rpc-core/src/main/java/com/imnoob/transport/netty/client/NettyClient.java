@@ -1,5 +1,9 @@
 package com.imnoob.transport.netty.client;
 
+import com.imnoob.transport.netty.codec.CommonDecoder;
+import com.imnoob.transport.netty.codec.CommonEncoder;
+import com.imnoob.transport.netty.model.RpcRequest;
+import com.imnoob.transport.netty.serializer.JsonSerializer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -15,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
+import java.util.UUID;
 
 public class NettyClient {
 
@@ -47,8 +52,8 @@ public class NettyClient {
                             //得到pipeline
                             ChannelPipeline pipeline = ch.pipeline();
                             //加入相关handler
-                            pipeline.addLast("decoder", new StringDecoder());
-                            pipeline.addLast("encoder", new StringEncoder());
+                            pipeline.addLast("decoder", new CommonDecoder());
+                            pipeline.addLast("encoder", new CommonEncoder(new JsonSerializer()));
                             //加入自定义的handler
                             pipeline.addLast(new ClientHandler());
                         }
@@ -69,7 +74,10 @@ public class NettyClient {
             while (scanner.hasNextLine()) {
                 String msg = scanner.nextLine();
                 //通过channel 发送到服务器端
-                channel.writeAndFlush(msg + "\r\n");
+                RpcRequest request = new RpcRequest();
+                request.setRequestId(UUID.randomUUID().toString().replace("-","")+msg);
+
+                channel.writeAndFlush(request);
             }
         }finally {
             group.shutdownGracefully();

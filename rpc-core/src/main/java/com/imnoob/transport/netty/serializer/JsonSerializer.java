@@ -2,8 +2,11 @@ package com.imnoob.transport.netty.serializer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.imnoob.transport.netty.enums.CustomizeException;
 import com.imnoob.transport.netty.enums.SerializeType;
+import com.imnoob.transport.netty.exception.SeriException;
 import com.imnoob.transport.netty.model.RpcRequest;
+import com.imnoob.transport.netty.model.RpcResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,8 +29,9 @@ public class JsonSerializer implements CommonSerializer {
         } catch (JsonProcessingException e) {
             logger.error("序列化时有错误发生:", e);
             e.printStackTrace();
+            throw new SeriException(CustomizeException.SERIALIZER_ERROR);
         }
-        return null;
+
     }
 
     public Object deserialize(byte[] bytes, Class<?> clazz) {
@@ -40,7 +44,7 @@ public class JsonSerializer implements CommonSerializer {
             return obj;
         } catch (IOException e) {
             logger.error("序列化时有错误发生:", e);
-            return null;
+            throw new SeriException(CustomizeException.SERIALIZER_ERROR);
         }
     }
 

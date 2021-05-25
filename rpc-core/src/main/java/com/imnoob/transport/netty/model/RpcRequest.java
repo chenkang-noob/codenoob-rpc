@@ -1,10 +1,12 @@
 package com.imnoob.transport.netty.model;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 
 @Data
+@ToString
 public class RpcRequest implements Serializable {
 
     private String requestId;
