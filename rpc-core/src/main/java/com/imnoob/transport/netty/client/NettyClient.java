@@ -4,6 +4,7 @@ import com.imnoob.transport.netty.codec.CommonDecoder;
 import com.imnoob.transport.netty.codec.CommonEncoder;
 import com.imnoob.transport.netty.model.RpcRequest;
 import com.imnoob.transport.netty.serializer.JsonSerializer;
+import com.imnoob.transport.netty.serializer.KryoSerializer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -53,7 +54,7 @@ public class NettyClient {
                             ChannelPipeline pipeline = ch.pipeline();
                             //加入相关handler
                             pipeline.addLast("decoder", new CommonDecoder());
-                            pipeline.addLast("encoder", new CommonEncoder(new JsonSerializer()));
+                            pipeline.addLast("encoder", new CommonEncoder(new KryoSerializer()));
                             //加入自定义的handler
                             pipeline.addLast(new ClientHandler());
                         }

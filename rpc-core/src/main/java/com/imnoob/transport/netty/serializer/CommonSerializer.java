@@ -15,12 +15,11 @@ public interface CommonSerializer {
     Integer PROTOBUF_SERIALIZER = 3;
 
     static CommonSerializer getSerializer(int code){
-        if (code == 0) return null;
+        if (code == 0) return new KryoSerializer();
         else if (code == 1) return new JsonSerializer();
-        else if (code == 2) return null;
-        else if (code == 3) return null;
+        else if (code == 2) return new KryoSerializer();
         else
-            throw new SeriException(CustomizeException.NOT_FOUND_SERIALIZER_TYPE); //TODO 抛出异常
+            throw new SeriException(CustomizeException.NOT_FOUND_SERIALIZER_TYPE);
     }
 
 
