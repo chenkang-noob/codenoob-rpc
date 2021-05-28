@@ -1,10 +1,10 @@
 package com.imnoob.transport.netty.enums;
 
 public enum SerializeType {
-    KryoSerializer(0),
-    JsonSerializer(1),
-    HessianSerializer(2),
-    ProtobufSerializer(3);
+    KRYO_SERIALIZER(0),
+    JSON_SERIALIZER(1),
+    PROTOBUF_SERIALIZER(2),
+    DEFALUT_SERIALIZER(1);
 
     private final int code;
 

@@ -4,7 +4,7 @@ import com.esotericsoftware.kryo.kryo5.Kryo;
 import com.esotericsoftware.kryo.kryo5.io.Input;
 import com.esotericsoftware.kryo.kryo5.io.Output;
 import com.imnoob.transport.netty.enums.CustomizeException;
-import com.imnoob.transport.netty.exception.SeriException;
+import com.imnoob.transport.netty.exception.CommonException;
 import com.imnoob.transport.netty.model.RpcRequest;
 import com.imnoob.transport.netty.model.RpcResponse;
 import org.slf4j.Logger;
@@ -41,7 +41,7 @@ public class KryoSerializer implements CommonSerializer {
             return output.toBytes();
         } catch (Exception e) {
             logger.error("序列化时错误发生:", e);
-            throw new SeriException(CustomizeException.SERIALIZER_ERROR);
+            throw new CommonException(CustomizeException.SERIALIZER_ERROR);
         }
     }
 
@@ -55,7 +55,7 @@ public class KryoSerializer implements CommonSerializer {
            return o;
        }catch (Exception e){
            logger.error("序列化异常");
-           throw new SeriException(CustomizeException.SERIALIZER_ERROR);
+           throw new CommonException(CustomizeException.SERIALIZER_ERROR);
        }
 
 

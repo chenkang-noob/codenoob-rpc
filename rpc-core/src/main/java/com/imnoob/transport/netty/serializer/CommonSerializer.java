@@ -1,26 +1,23 @@
 package com.imnoob.transport.netty.serializer;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.imnoob.transport.netty.enums.CustomizeException;
-import com.imnoob.transport.netty.exception.SeriException;
-import com.imnoob.transport.netty.model.RpcRequest;
-
-import java.io.IOException;
+import com.imnoob.transport.netty.exception.CommonException;
 
 public interface CommonSerializer {
 
     Integer KRYO_SERIALIZER = 0;
     Integer JSON_SERIALIZER = 1;
-    Integer HESSIAN_SERIALIZER = 2;
-    Integer PROTOBUF_SERIALIZER = 3;
+    Integer PROTOBUF_SERIALIZER = 2;
+
 
     static CommonSerializer getSerializer(int code){
         if (code == 0) return new KryoSerializer();
         else if (code == 1) return new JsonSerializer();
         else if (code == 2) return new KryoSerializer();
         else
-            throw new SeriException(CustomizeException.NOT_FOUND_SERIALIZER_TYPE);
+            throw new CommonException(CustomizeException.NOT_FOUND_SERIALIZER_TYPE);
     }
+
 
 
 

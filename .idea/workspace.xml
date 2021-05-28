@@ -2,13 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e5cfad6-8ffe-4bdd-9e1b-41c59c9f9f36" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/serializer/KryoSerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpc-client-test/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/client/ChannelProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/provider/NacosProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/provider/RegisterProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/client/NettyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/client/NettyClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/enums/CustomizeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/enums/CustomizeException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/enums/SerializeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/enums/SerializeType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/exception/SeriException.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/exception/CommonException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/serializer/CommonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/serializer/CommonSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/serializer/JsonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/serializer/JsonSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/serializer/KryoSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/serializer/KryoSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/server/NettyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/server/NettyServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/client/NettyClient$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/client/NettyClient$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/client/NettyClient$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/client/NettyClient$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/client/NettyClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/client/NettyClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/enums/CustomizeException.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/enums/CustomizeException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/enums/SerializeType.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/enums/SerializeType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/exception/SeriException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/serializer/CommonSerializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/serializer/CommonSerializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/serializer/JsonSerializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/serializer/JsonSerializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/serializer/KryoSerializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/serializer/KryoSerializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +42,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -36,6 +60,7 @@
     </option>
     <option name="importingSettings">
       <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
         <option name="jdkForImporter" value="1.8" />
         <option name="vmOptionsForImporter" value="-Xmx768m" />
       </MavenImportingSettings>
@@ -109,7 +134,9 @@
       <workItem from="1621908853551" duration="4641000" />
       <workItem from="1621995036126" duration="46000" />
       <workItem from="1622086610543" duration="1207000" />
-      <workItem from="1622119818383" duration="3492000" />
+      <workItem from="1622119818383" duration="3658000" />
+      <workItem from="1622181020555" duration="7543000" />
+      <workItem from="1622203242898" duration="4786000" />
     </task>
     <servers />
   </component>
@@ -117,63 +144,67 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="765" y="256" key="#com.intellij.ide.util.MemberChooser" timestamp="1622120589147">
+    <state x="765" y="256" key="#com.intellij.ide.util.MemberChooser" timestamp="1622204699445">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="612" y="205" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1621909475977" />
-    <state x="765" y="256" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1622120589147" />
+    <state x="765" y="256" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1622204699445" />
     <state width="409" height="646" key="DebuggerActiveHint" timestamp="1621848401239">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="409" height="646" key="DebuggerActiveHint/0.0.1920.1080@0.0.1920.1080" timestamp="1621848401239" />
-    <state width="1877" height="415" key="GridCell.Tab.0.bottom" timestamp="1622125324853">
+    <state width="1877" height="222" key="GridCell.Tab.0.bottom" timestamp="1622207558294">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="249" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1621912287516" />
-    <state width="1877" height="415" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1622125324853" />
-    <state width="1877" height="415" key="GridCell.Tab.0.center" timestamp="1622125324853">
+    <state width="1877" height="222" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1622207558294" />
+    <state width="1877" height="222" key="GridCell.Tab.0.center" timestamp="1622207558294">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="249" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1621912287516" />
-    <state width="1877" height="415" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1622125324853" />
-    <state width="1877" height="415" key="GridCell.Tab.0.left" timestamp="1622125324853">
+    <state width="1877" height="222" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1622207558294" />
+    <state width="1877" height="222" key="GridCell.Tab.0.left" timestamp="1622207558294">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="249" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1621912287516" />
-    <state width="1877" height="415" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1622125324853" />
-    <state width="1877" height="415" key="GridCell.Tab.0.right" timestamp="1622125324853">
+    <state width="1877" height="222" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1622207558294" />
+    <state width="1877" height="222" key="GridCell.Tab.0.right" timestamp="1622207558294">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="249" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1621912287516" />
-    <state width="1877" height="415" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1622125324853" />
-    <state width="1877" height="415" key="GridCell.Tab.1.bottom" timestamp="1622125324854">
+    <state width="1877" height="222" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1622207558294" />
+    <state width="1877" height="415" key="GridCell.Tab.1.bottom" timestamp="1622207526933">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="395" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1621911740530" />
-    <state width="1877" height="415" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1622125324854" />
-    <state width="1877" height="415" key="GridCell.Tab.1.center" timestamp="1622125324854">
+    <state width="1877" height="415" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1622207526933" />
+    <state width="1877" height="415" key="GridCell.Tab.1.center" timestamp="1622207526933">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="395" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1621911740530" />
-    <state width="1877" height="415" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1622125324854" />
-    <state width="1877" height="415" key="GridCell.Tab.1.left" timestamp="1622125324854">
+    <state width="1877" height="415" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1622207526933" />
+    <state width="1877" height="415" key="GridCell.Tab.1.left" timestamp="1622207526933">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="395" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1621911740530" />
-    <state width="1877" height="415" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1622125324854" />
-    <state width="1877" height="415" key="GridCell.Tab.1.right" timestamp="1622125324854">
+    <state width="1877" height="415" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1622207526933" />
+    <state width="1877" height="415" key="GridCell.Tab.1.right" timestamp="1622207526933">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="395" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1621911740530" />
-    <state width="1877" height="415" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1622125324854" />
+    <state width="1877" height="415" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1622207526933" />
     <state x="490" y="195" key="Maven.ArtifactSearchDialog" timestamp="1621858689572">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="490" y="195" key="Maven.ArtifactSearchDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1621858689572" />
-    <state x="334" y="146" key="new project wizard" timestamp="1621834917740">
+    <state x="334" y="146" key="new project wizard" timestamp="1622204365608">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="334" y="146" key="new project wizard/0.0.1920.1080@0.0.1920.1080" timestamp="1621834917740" />
+    <state x="334" y="146" key="new project wizard/0.0.1920.1080@0.0.1920.1080" timestamp="1622204365608" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1622184326372">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1622184326372" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -197,6 +228,11 @@
           <url>file://$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/codec/CommonDecoder.java</url>
           <line>23</line>
           <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/provider/NacosProvider.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

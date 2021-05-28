@@ -4,9 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.imnoob.transport.netty.enums.CustomizeException;
 import com.imnoob.transport.netty.enums.SerializeType;
-import com.imnoob.transport.netty.exception.SeriException;
+import com.imnoob.transport.netty.exception.CommonException;
 import com.imnoob.transport.netty.model.RpcRequest;
-import com.imnoob.transport.netty.model.RpcResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +28,7 @@ public class JsonSerializer implements CommonSerializer {
         } catch (JsonProcessingException e) {
             logger.error("序列化时有错误发生:", e);
             e.printStackTrace();
-            throw new SeriException(CustomizeException.SERIALIZER_ERROR);
+            throw new CommonException(CustomizeException.SERIALIZER_ERROR);
         }
 
     }
@@ -44,12 +43,12 @@ public class JsonSerializer implements CommonSerializer {
             return obj;
         } catch (IOException e) {
             logger.error("序列化时有错误发生:", e);
-            throw new SeriException(CustomizeException.SERIALIZER_ERROR);
+            throw new CommonException(CustomizeException.SERIALIZER_ERROR);
         }
     }
 
     @Override
     public int getCode() {
-        return SerializeType.JsonSerializer.getCode();
+        return CommonSerializer.JSON_SERIALIZER;
     }
 }

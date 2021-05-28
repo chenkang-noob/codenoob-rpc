@@ -2,6 +2,7 @@ package com.imnoob.transport.netty.server;
 
 import com.imnoob.transport.netty.codec.CommonDecoder;
 import com.imnoob.transport.netty.codec.CommonEncoder;
+import com.imnoob.transport.netty.provider.NacosProvider;
 import com.imnoob.transport.netty.serializer.JsonSerializer;
 import com.imnoob.transport.netty.serializer.KryoSerializer;
 import io.netty.bootstrap.ServerBootstrap;
@@ -27,19 +28,24 @@ public class NettyServer {
     private Integer port;
     private String serviceName;
     private String host;
+    private NacosProvider nacosProvider;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public NettyServer(Integer port, String serviceName, String host) {
+    public NettyServer(Integer port, String serviceName, String host,NacosProvider nacosProvider) {
         this.port = port;
         this.serviceName = serviceName;
         this.host = host;
+
+        this.nacosProvider = nacosProvider;
     }
 
     public NettyServer() {
         this.port=9000;
-        this.serviceName = "rpc-comsumer";
+        this.serviceName = "rpc-provider";
         this.host = "127.0.0.1";
+
+        nacosProvider = new NacosProvider("127.0.0.1",8848);
     }
 
 
@@ -71,11 +77,17 @@ public class NettyServer {
                public void operationComplete(Future<? super Void> future) throws Exception {
                    if (future.isSuccess()){
                        logger.info("服务监听启动成功：" + port);
+                       //           注册服务
+                       nacosProvider.registerService("rpc-provider",host,port);
                    }else {
                        logger.error("服务启动失败！");
+                       //           删除服务
+                       nacosProvider.deregisterInstance("rpc-provider",host,port);
                    }
                }
            });
+
+
 
            ChannelFuture close = sync.channel().closeFuture().sync();
            close.addListener(new GenericFutureListener<Future<? super Void>>() {
@@ -87,7 +99,7 @@ public class NettyServer {
                }
            });
        }catch (InterruptedException e){
-           logger.error("启动失败");
+           logger.error("中断");
        }finally {
            bossGroup.shutdownGracefully();
            workerGroup.shutdownGracefully();
