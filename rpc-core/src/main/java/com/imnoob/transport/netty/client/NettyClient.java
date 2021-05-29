@@ -1,5 +1,7 @@
 package com.imnoob.transport.netty.client;
 
+import com.imnoob.service.HelloService;
+import com.imnoob.transport.netty.cache.CallResultCache;
 import com.imnoob.transport.netty.codec.CommonDecoder;
 import com.imnoob.transport.netty.codec.CommonEncoder;
 import com.imnoob.transport.netty.enums.CustomizeException;
@@ -65,24 +67,22 @@ public class NettyClient {
                 logger.info("消息发送成功:"+request);
             }else{
                 future.channel().close();
+                res.completeExceptionally(future.cause());
                 throw new CommonException(CustomizeException.SEND_MSG_ERROR);
             }
         });
-
+        CallResultCache.getResultMap().put(request.getRequestId(), res);
         return res;
     }
 
     public static void main(String[] args) throws Exception{
         NettyClient nettyClient = new NettyClient();
 
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()) {
-            String msg = scanner.nextLine();
-            //通过channel 发送到服务器端
-            RpcRequest request = new RpcRequest();
-            request.setRequestId(UUID.randomUUID().toString().replace("-","")+msg);
+        ClientProxy proxy = new ClientProxy(nettyClient, "rpc-provider");
+        HelloService service = proxy.getProxy(HelloService.class);
+        String res = service.sayHello("hello im client");
+        System.out.println(res);
 
-            CompletableFuture<RpcResponse> future = nettyClient.sendMsg("rpc-provider", request);
-        }
+        System.out.println("---------------------");
     }
 }
