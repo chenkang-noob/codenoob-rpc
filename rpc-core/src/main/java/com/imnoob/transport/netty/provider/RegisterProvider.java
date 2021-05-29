@@ -1,7 +1,9 @@
 package com.imnoob.transport.netty.provider;
 
-import com.alibaba.nacos.api.exception.NacosException;
+
+import com.alibaba.nacos.api.naming.listener.EventListener;
 import com.alibaba.nacos.api.naming.pojo.Instance;
+
 
 import java.util.List;
 
@@ -14,4 +16,6 @@ public interface RegisterProvider  {
     void deregisterInstance(String serviceName, String ip, int port) ;
 
     List<Instance> selectInstances(String serviceName, boolean healthy);
+
+    void subscribe(String serviceName, EventListener listener);
 }

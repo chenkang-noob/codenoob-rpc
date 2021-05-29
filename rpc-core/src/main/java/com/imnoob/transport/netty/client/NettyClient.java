@@ -50,45 +50,7 @@ public class NettyClient {
         serializer = CommonSerializer.getSerializer(SerializeType.DEFALUT_SERIALIZER.getCode());
     }
 
-    public void run() throws Exception{
-        EventLoopGroup group = new NioEventLoopGroup();
 
-        try {
-
-            Bootstrap bootstrap = new Bootstrap()
-                    .group(group)
-                    .channel(NioSocketChannel.class)
-                    .handler(new ChannelInitializer<SocketChannel>() {
-
-                        @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
-
-                            //得到pipeline
-                            ChannelPipeline pipeline = ch.pipeline();
-                            //加入相关handler
-                            pipeline.addLast("decoder", new CommonDecoder());
-                            pipeline.addLast("encoder", new CommonEncoder(new KryoSerializer()));
-                            //加入自定义的handler
-                            pipeline.addLast(new ClientHandler());
-                        }
-                    });
-
-            ChannelFuture channelFuture = bootstrap.connect(HOST, PORT).sync();
-            //得到channel
-            Channel channel = channelFuture.channel();
-
-            channel.closeFuture().addListener(new GenericFutureListener<Future<? super Void>>() {
-                @Override
-                public void operationComplete(Future<? super Void> future) throws Exception {
-                    System.out.println("通道关闭");
-                }
-            });
-            //客户端需要输入信息，创建一个扫描器
-
-        }finally {
-            group.shutdownGracefully();
-        }
-    }
 
     CompletableFuture<RpcResponse> sendMsg(String serviceName, RpcRequest request) {
         CompletableFuture<RpcResponse> res = new CompletableFuture<>();

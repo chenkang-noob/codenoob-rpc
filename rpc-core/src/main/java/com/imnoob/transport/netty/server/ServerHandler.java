@@ -38,7 +38,6 @@ public class ServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcRequest request) throws Exception {
         logger.info("接收到客户端请求:"+request.getRequestId());
         if (channelHandlerContext.channel().isActive() && channelHandlerContext.channel().isWritable()) {
-//            channelHandlerContext.writeAndFlush("i get it");
             RpcResponse<String> response = new RpcResponse<>();
             response.setRequestId(request.getRequestId());
             response.setMessage("OK");

@@ -3,6 +3,7 @@ package com.imnoob.transport.netty.provider;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingFactory;
 import com.alibaba.nacos.api.naming.NamingService;
+import com.alibaba.nacos.api.naming.listener.EventListener;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 
 import com.alibaba.nacos.api.naming.pojo.Service;
@@ -10,6 +11,7 @@ import com.imnoob.transport.netty.enums.CustomizeException;
 import com.imnoob.transport.netty.exception.CommonException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +51,6 @@ public class NacosProvider implements RegisterProvider {
         }catch (NacosException exception){
             logger.error("Nacos 服务注册失败");
             throw new CommonException(CustomizeException.NACOS_TIMEOUT);
-
         }
     }
 
@@ -77,6 +78,17 @@ public class NacosProvider implements RegisterProvider {
             throw new CommonException(CustomizeException.NACOS_TIMEOUT);
         }
 
+    }
+
+    @Override
+    public void subscribe(String serviceName, EventListener listener) {
+        try {
+            NamingService naming = NamingFactory.createNamingService(nacosIp);
+            naming.subscribe(serviceName,listener);
+        }catch (Exception e){
+            logger.error("");
+
+        }
     }
 
 

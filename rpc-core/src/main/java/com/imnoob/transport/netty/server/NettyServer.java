@@ -32,19 +32,17 @@ public class NettyServer {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public NettyServer(Integer port, String serviceName, String host,NacosProvider nacosProvider) {
+    public NettyServer(String serviceName, String host,Integer port, NacosProvider nacosProvider) {
         this.port = port;
         this.serviceName = serviceName;
         this.host = host;
-
         this.nacosProvider = nacosProvider;
     }
 
     public NettyServer() {
-        this.port=9000;
+        this.port=900;
         this.serviceName = "rpc-provider";
         this.host = "127.0.0.1";
-
         nacosProvider = new NacosProvider("127.0.0.1",8848);
     }
 
@@ -109,6 +107,26 @@ public class NettyServer {
     }
 
     public static void main(String[] args) {
-        new NettyServer().run();
+        NacosProvider nacosProvider = new NacosProvider();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new NettyServer("rpc-provider", "127.0.0.1", 9000, nacosProvider).run();
+            }
+        }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new NettyServer("rpc-provider", "127.0.0.1", 9001, nacosProvider).run();
+            }
+        }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new NettyServer("rpc-provider", "127.0.0.1", 9002, nacosProvider).run();
+            }
+        }).start();
+
+
     }
 }
