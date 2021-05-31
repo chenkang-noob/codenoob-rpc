@@ -13,10 +13,10 @@ public class ClientTest {
         ClientProxy proxy = new ClientProxy(nettyClient, "rpc-provider");
 
         People rs = new People(18, "张三");
-//        HelloService service = proxy.getProxy(HelloService.class);
-//        People res = service.sayHello("hello");
-//        System.out.println(res);
-//        System.out.println("----------------------------");
+        HelloService service = proxy.getProxy(HelloService.class);
+        People res = service.sayHello("hello");
+        System.out.println(res);
+        System.out.println("----------------------------");
 
         ByeSerivce byeSerivce = proxy.getProxy(ByeSerivce.class);
         String s = byeSerivce.sayBye(rs);

@@ -23,6 +23,7 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import org.slf4j.Logger;
@@ -32,6 +33,7 @@ import sun.reflect.misc.ReflectUtil;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 
 public class NettyServer {
@@ -84,6 +86,7 @@ public class NettyServer {
                         ChannelPipeline pipeline = socketChannel.pipeline();
                         pipeline.addLast("decoder",new CommonDecoder());
                         pipeline.addLast("encoder",new CommonEncoder(new KryoSerializer()));
+                        pipeline.addLast(new IdleStateHandler(60, 0, 0, TimeUnit.SECONDS));
                         pipeline.addLast(new ServerHandler());
                         //坑： netty handler的执行顺序
                     }

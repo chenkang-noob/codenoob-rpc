@@ -18,7 +18,14 @@ public class KryoSerializer implements CommonSerializer {
 
     //Kryo线程不安全  需要使用道 threadlocal
 
-    ThreadLocal<Kryo> threadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<Kryo> threadLocal = ThreadLocal.withInitial(() -> {
+        Kryo kryo = new Kryo();
+        kryo.register(RpcResponse.class);
+        kryo.register(RpcRequest.class);
+        kryo.setReferences(true);
+        kryo.setRegistrationRequired(false);
+        return kryo;
+    });
     private static final Logger logger = LoggerFactory.getLogger(KryoSerializer.class);
 
     public KryoSerializer() {
@@ -27,12 +34,12 @@ public class KryoSerializer implements CommonSerializer {
         kryo.register(RpcResponse.class);
         kryo.setReferences(true);
         kryo.setRegistrationRequired(false);
-        threadLocal.set(kryo);
 
     }
 
     @Override
     public byte[] serializer(Object obj) {
+        System.out.println(Thread.currentThread().getName()+"线程");
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
              Output output = new Output(byteArrayOutputStream)) {
             Kryo kryo = threadLocal.get();

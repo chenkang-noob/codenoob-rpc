@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import javax.xml.ws.Response;
 import java.lang.reflect.Method;
 
 public class ServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
@@ -43,7 +44,14 @@ public class ServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcRequest request) throws Exception {
         logger.info("接收到客户端请求:"+request.getRequestId());
-        if (channelHandlerContext.channel().isActive() && channelHandlerContext.channel().isWritable()) {
+        if (request.getInterfaceName() == null){
+            RpcResponse rpcResponse = new RpcResponse();
+            rpcResponse.setRequestId(request.getRequestId());
+            rpcResponse.setStatusCode(ResponseCode.HEART_BEAT.getCode());
+            rpcResponse.setMessage(ResponseCode.HEART_BEAT.getMsg());
+            channelHandlerContext.writeAndFlush(rpcResponse);
+        }
+        else if (channelHandlerContext.channel().isActive() && channelHandlerContext.channel().isWritable()) {
             RpcResponse rpcResponse = requestHandler(request);
             channelHandlerContext.writeAndFlush(rpcResponse);
         } else {

@@ -18,6 +18,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class ChannelProvider {
 
@@ -134,7 +136,9 @@ public class ChannelProvider {
                 //加入相关handler
                 pipeline.addLast("decoder", new CommonDecoder());
                 pipeline.addLast("encoder", new CommonEncoder(serializer));
+
                 //加入自定义的handler
+                pipeline.addLast(new IdleStateHandler(0, 30, 0, TimeUnit.SECONDS));
                 pipeline.addLast(new ClientHandler());
             }
         });

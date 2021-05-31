@@ -2,6 +2,7 @@ package com.imnoob.transport.netty.enums;
 
 public enum ResponseCode {
     OK(200,"请求成功"),
+    HEART_BEAT(201,"心跳响应"),
     SYSTEM_ERROR(500,"系统错误"),
     METHOM_CALL_ERROR(501,"方法调用失败"),
     SERVICE_NOT_FOUND(502,"服务未发现");
