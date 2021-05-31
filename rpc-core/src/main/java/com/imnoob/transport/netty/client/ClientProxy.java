@@ -27,7 +27,7 @@ public class ClientProxy implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         RpcRequest request = new RpcRequest();
         request.setRequestId(UUID.randomUUID().toString().replace("-",""));
-        request.setInterfaceName(method.getDeclaringClass().getName());
+        request.setInterfaceName(method.getDeclaringClass().getTypeName());
         request.setMethodName(method.getName());
         request.setParameters(args);
         request.setParamTypes(method.getParameterTypes());

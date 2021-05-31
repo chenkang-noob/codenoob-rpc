@@ -12,6 +12,7 @@
     <module>rpc-core</module>
       <module>rpc-client-test</module>
       <module>rpc-Api</module>
+      <module>rpc-server-test</module>
   </modules>
 
   <name>codenoob-rpc</name>

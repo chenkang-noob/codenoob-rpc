@@ -47,16 +47,12 @@ public class KryoSerializer implements CommonSerializer {
 
     @Override
     public Object deserialize(byte[] bytes, Class<?> clazz) {
-       try {
-           ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
-           Input input = new Input(byteArrayInputStream);
-           Kryo kryo = threadLocal.get();
-           Object o = kryo.readObject(input, clazz);
-           return o;
-       }catch (Exception e){
-           logger.error("序列化异常");
-           throw new CommonException(CustomizeException.SERIALIZER_ERROR);
-       }
+
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+        Input input = new Input(byteArrayInputStream);
+        Kryo kryo = threadLocal.get();
+        Object o = kryo.readObject(input, clazz);
+        return o;
 
 
     }

@@ -25,8 +25,7 @@ public class CallResultCache {
     public static CompletableFuture<RpcResponse>  get(String id) throws ExecutionException, InterruptedException {
         CompletableFuture<RpcResponse> future = resultMap.get(id);
         resultMap.remove(id);
-        if (future != null) return future;
-        else return null;
+        return future;
     }
 
     public static void put(String id, CompletableFuture<RpcResponse> res){
@@ -37,7 +36,6 @@ public class CallResultCache {
         if (resultMap.containsKey(requestId)) {
             resultMap.remove(requestId);
         }
-
     }
 
 }

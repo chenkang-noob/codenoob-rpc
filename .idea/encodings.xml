@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/rpc-Api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/rpc-client-test/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/rpc-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rpc-server-test/src/main/java" charset="UTF-8" />
   </component>
 </project>

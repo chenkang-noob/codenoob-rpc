@@ -59,11 +59,7 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>com.imnoob</groupId>
-            <artifactId>rpc-Api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+
 
     </dependencies>
 

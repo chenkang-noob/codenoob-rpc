@@ -11,6 +11,7 @@ import com.imnoob.transport.netty.loadbalance.RandomLoadBalance;
 import com.imnoob.transport.netty.loadbalance.RoundLoadBalance;
 import com.imnoob.transport.netty.provider.NacosProvider;
 import com.imnoob.transport.netty.serializer.CommonSerializer;
+import com.imnoob.transport.netty.serializer.JsonSerializer;
 import com.imnoob.transport.netty.serializer.KryoSerializer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -112,11 +113,12 @@ public class ChannelProvider {
         }
         Instance instance = loadBalance.selectOne(instances);
         logger.info("选择了："+instance.getPort());
+
         String ip = instance.getIp();
         int port = instance.getPort();
 
         String key = ip + port + serializer.getCode();
-        Channel channel = channelMap.get(key);
+
         if (channelMap.contains(key)){
             Channel tmp = channelMap.get(key);
             if (tmp != null) return tmp;
@@ -131,7 +133,7 @@ public class ChannelProvider {
                 ChannelPipeline pipeline = socketChannel.pipeline();
                 //加入相关handler
                 pipeline.addLast("decoder", new CommonDecoder());
-                pipeline.addLast("encoder", new CommonEncoder(new KryoSerializer()));
+                pipeline.addLast("encoder", new CommonEncoder(serializer));
                 //加入自定义的handler
                 pipeline.addLast(new ClientHandler());
             }

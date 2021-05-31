@@ -1,7 +1,13 @@
 package com.imnoob.transport.netty.server;
 
+import com.imnoob.transport.netty.Utils.PackageScanUtil;
+import com.imnoob.transport.netty.annotation.Service;
+import com.imnoob.transport.netty.annotation.ServiceScan;
+import com.imnoob.transport.netty.cache.ServiceCache;
 import com.imnoob.transport.netty.codec.CommonDecoder;
 import com.imnoob.transport.netty.codec.CommonEncoder;
+import com.imnoob.transport.netty.enums.CustomizeException;
+import com.imnoob.transport.netty.exception.CommonException;
 import com.imnoob.transport.netty.provider.NacosProvider;
 import com.imnoob.transport.netty.serializer.JsonSerializer;
 import com.imnoob.transport.netty.serializer.KryoSerializer;
@@ -21,6 +27,12 @@ import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.reflect.misc.ReflectUtil;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.Set;
+
 
 public class NettyServer {
 
@@ -40,14 +52,23 @@ public class NettyServer {
     }
 
     public NettyServer() {
-        this.port=900;
+        this.port=9000;
         this.serviceName = "rpc-provider";
         this.host = "127.0.0.1";
         nacosProvider = new NacosProvider("127.0.0.1",8848);
     }
 
 
+    //TODO 异常处理
     public void run(){
+        try {
+            serviceScan();
+        } catch (Exception e) {
+            logger.error("注解扫描错误");
+            throw new CommonException(CustomizeException.ANNOTATION_SCAN_ERROR);
+        }
+
+
         NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
@@ -106,27 +127,47 @@ public class NettyServer {
 
     }
 
-    public static void main(String[] args) {
-        NacosProvider nacosProvider = new NacosProvider();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                new NettyServer("rpc-provider", "127.0.0.1", 9000, nacosProvider).run();
+    public void serviceScan() throws ClassNotFoundException, IOException, IllegalAccessException, InstantiationException {
+        //TODO 扫描注解
+        StackTraceElement[] stacks = new Throwable().getStackTrace();
+
+        String startClass = stacks[stacks.length-1].getClassName();
+        Class<?> clazz = Class.forName(startClass);
+        ServiceScan annotation = clazz.getAnnotation(ServiceScan.class);
+        if (annotation == null){
+            logger.error("启动类未标识注解 ServiceScan");
+            throw new CommonException(CustomizeException.RUN_ANNOTATION_ERROR);
+
+        }
+        String basePackageName = annotation.value();
+        if ("".equals(basePackageName)){
+            basePackageName = startClass.substring(0, startClass.lastIndexOf("."));
+        }
+
+
+        Set<Class<?>> classes = PackageScanUtil.getClasses(basePackageName);
+
+        Iterator<Class<?>> iterator = classes.iterator();
+        while (iterator.hasNext()){
+            Class<?> next = iterator.next();
+            Service anno = next.getAnnotation(Service.class);
+            if (anno != null) {
+                if ("".equals(anno.value())){
+                    Class<?>[] interfaces = next.getInterfaces();
+                    for (Class<?> tmp : interfaces) {
+                        ServiceCache.addService(tmp.getTypeName(), next.newInstance());
+                    }
+                }else{
+                    ServiceCache.addService(anno.value(), next.newInstance());
+                }
             }
-        }).start();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                new NettyServer("rpc-provider", "127.0.0.1", 9001, nacosProvider).run();
-            }
-        }).start();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                new NettyServer("rpc-provider", "127.0.0.1", 9002, nacosProvider).run();
-            }
-        }).start();
+        }
 
 
     }
+
+
+
+
+
 }

@@ -30,6 +30,7 @@ public class CommonDecoder extends ReplayingDecoder<Void> {
         int serial_type = byteBuf.readInt();
         CommonSerializer serializer = CommonSerializer.getSerializer(serial_type);
 
+
         Class<?> clazz ;
         if (package_type == PackageType.RPC_REQUEST.getCode()){
             clazz = RpcRequest.class;

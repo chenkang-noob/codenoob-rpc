@@ -1,5 +1,8 @@
 package com.imnoob.transport.netty.server;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.imnoob.transport.netty.cache.ServiceCache;
+import com.imnoob.transport.netty.enums.ResponseCode;
 import com.imnoob.transport.netty.model.RpcRequest;
 import com.imnoob.transport.netty.model.RpcResponse;
 import io.netty.buffer.Unpooled;
@@ -9,6 +12,9 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+
+import java.lang.reflect.Method;
 
 public class ServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
 
@@ -38,14 +44,37 @@ public class ServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcRequest request) throws Exception {
         logger.info("接收到客户端请求:"+request.getRequestId());
         if (channelHandlerContext.channel().isActive() && channelHandlerContext.channel().isWritable()) {
-            RpcResponse<String> response = new RpcResponse<>();
-            response.setRequestId(request.getRequestId());
-            response.setMessage("OK");
-            response.setData("i get it");
-            channelHandlerContext.writeAndFlush(response);
+            RpcResponse rpcResponse = requestHandler(request);
+            channelHandlerContext.writeAndFlush(rpcResponse);
         } else {
             logger.error("通道不可写");
         }
 
+    }
+
+    private RpcResponse requestHandler(RpcRequest request){
+        Object res;
+        String key = request.getInterfaceName();
+        Object service = ServiceCache.findService(key);
+        if (service != null){
+            try {
+                Method method = service.getClass().getMethod(request.getMethodName(), request.getParamTypes());
+                Object[] objs = request.getParameters();
+                Class<?>[] types = request.getParamTypes();
+                //TODO 解决LinkedHashMap的情况
+                for (int i=0;i < objs.length;i++) {
+                    ObjectMapper mapper = new ObjectMapper();
+                    Object o = mapper.convertValue(objs[i], types[i]);
+                    objs[i] = o;
+                }
+                res = method.invoke(service, request.getParameters());
+                return RpcResponse.OK(request.getRequestId(),res);
+            } catch (Exception e) {
+                logger.error("方法调用失败");
+                return RpcResponse.ERROR(request.getRequestId(), ResponseCode.METHOM_CALL_ERROR);
+            }
+        }else {
+            return RpcResponse.ERROR(request.getRequestId(),ResponseCode.SERVICE_NOT_FOUND);
+        }
     }
 }
