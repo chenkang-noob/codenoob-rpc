@@ -1,6 +1,7 @@
 package com.imnoob.rpcApp;
 
 import com.imnoob.transport.netty.annotation.ServiceScan;
+import com.imnoob.transport.netty.cache.RateLimitCache;
 import com.imnoob.transport.netty.cache.ServiceCache;
 import com.imnoob.transport.netty.server.NettyServer;
 
@@ -13,7 +14,6 @@ public class ServerApplication {
         NettyServer nettyServer = new NettyServer();
         try {
             nettyServer.run();
-//            nettyServer.serviceScan();
         } catch (Exception e) {
             e.printStackTrace();
         }

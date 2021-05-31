@@ -1,13 +1,17 @@
 package com.imnoob.transport.netty.server;
 
+import com.google.common.util.concurrent.RateLimiter;
 import com.imnoob.transport.netty.Utils.PackageScanUtil;
+import com.imnoob.transport.netty.annotation.RateLimit;
 import com.imnoob.transport.netty.annotation.Service;
 import com.imnoob.transport.netty.annotation.ServiceScan;
+import com.imnoob.transport.netty.cache.RateLimitCache;
 import com.imnoob.transport.netty.cache.ServiceCache;
 import com.imnoob.transport.netty.codec.CommonDecoder;
 import com.imnoob.transport.netty.codec.CommonEncoder;
 import com.imnoob.transport.netty.enums.CustomizeException;
 import com.imnoob.transport.netty.exception.CommonException;
+import com.imnoob.transport.netty.handler.RateLimitHandler;
 import com.imnoob.transport.netty.provider.NacosProvider;
 import com.imnoob.transport.netty.serializer.JsonSerializer;
 import com.imnoob.transport.netty.serializer.KryoSerializer;
@@ -154,14 +158,29 @@ public class NettyServer {
         while (iterator.hasNext()){
             Class<?> next = iterator.next();
             Service anno = next.getAnnotation(Service.class);
+            RateLimit rateAnno = next.getAnnotation(RateLimit.class);
             if (anno != null) {
                 if ("".equals(anno.value())){
                     Class<?>[] interfaces = next.getInterfaces();
                     for (Class<?> tmp : interfaces) {
-                        ServiceCache.addService(tmp.getTypeName(), next.newInstance());
+                        if (rateAnno != null){
+                            ServiceCache.addService(tmp.getTypeName(), new RateLimitHandler().getProxy(next));
+                        }else{
+                            ServiceCache.addService(tmp.getTypeName(), next.newInstance());
+                        }
+
                     }
                 }else{
                     ServiceCache.addService(anno.value(), next.newInstance());
+                }
+                //TODO 限流代理
+
+                if (rateAnno != null && anno != null){
+                    double limitNum = rateAnno.value();
+                    int time = rateAnno.timeout();
+                    TimeUnit timeUnit = rateAnno.timeUnit();
+                    RateLimiter rateLimiter = RateLimiter.create(limitNum, time, timeUnit);
+                    RateLimitCache.addRateLimit(next.getName(),rateLimiter);
                 }
             }
         }

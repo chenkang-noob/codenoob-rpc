@@ -9,7 +9,8 @@ public enum CustomizeException {
     NETTY_CLIENT_TIMEOUT(1003,"客户端连接超时"),
     SEND_MSG_ERROR(1004,"消息发送失败"),
     RUN_ANNOTATION_ERROR(1005,"启动类注解异常"),
-    ANNOTATION_SCAN_ERROR(1005,"注解扫描异常");
+    ANNOTATION_SCAN_ERROR(1006,"注解扫描异常"),
+    LIMITE_RATE_ERROR(1007,"限流，请稍后访问");
 
 
     private Integer code;

@@ -2,21 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e5cfad6-8ffe-4bdd-9e1b-41c59c9f9f36" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/annotation/RateLimit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/cache/RateLimitCache.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/handler/RateLimitHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-client-test/src/main/java/com/imnoob/ClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-client-test/src/main/java/com/imnoob/ClientTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-client-test/target/classes/com/imnoob/ClientTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-client-test/target/classes/com/imnoob/ClientTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/client/ChannelProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/client/ChannelProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/client/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/client/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/enums/ResponseCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/enums/ResponseCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/serializer/KryoSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/serializer/KryoSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/enums/CustomizeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/enums/CustomizeException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/server/NettyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/server/NettyServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/server/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/server/ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/client/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/client/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/enums/CustomizeException.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/enums/CustomizeException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/enums/ResponseCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/enums/ResponseCode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/NettyServer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/target/classes/com/imnoob/transport/netty/server/ServerHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-server-test/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-server-test/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-server-test/src/main/java/com/imnoob/rpcApp/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-server-test/src/main/java/com/imnoob/rpcApp/ServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-server-test/src/main/java/com/imnoob/rpcApp/service/Impl/HelloServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-server-test/src/main/java/com/imnoob/rpcApp/service/Impl/HelloServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-server-test/target/classes/com/imnoob/rpcApp/service/Impl/HelloServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-server-test/target/classes/com/imnoob/rpcApp/service/Impl/HelloServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +33,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="AnnotationType" />
         <option value="Enum" />
+        <option value="AnnotationType" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -76,7 +83,20 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.ClientTest">
-    <configuration name="ClientTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="CgTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.imnoob.rpcApp.service.Impl.CgTest" />
+      <module name="rpc-server-test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.imnoob.rpcApp.service.Impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientTest" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.imnoob.ClientTest" />
       <module name="rpc-client-test" />
       <extension name="coverage">
@@ -128,10 +148,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.CgTest" />
+      <item itemvalue="Application.ClientTest" />
+      <item itemvalue="Application.NettyClient" />
+      <item itemvalue="Application.NettyServer" />
+      <item itemvalue="Application.ServerApplication" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.ClientTest" />
         <item itemvalue="Application.ServerApplication" />
+        <item itemvalue="Application.CgTest" />
         <item itemvalue="Application.NettyClient" />
         <item itemvalue="Application.NettyServer" />
       </list>
@@ -160,6 +188,7 @@
       <workItem from="1622344492433" duration="2600000" />
       <workItem from="1622363069762" duration="8739000" />
       <workItem from="1622426894571" duration="21564000" />
+      <workItem from="1622466837682" duration="4646000" />
     </task>
     <servers />
   </component>
@@ -167,63 +196,67 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="765" y="256" key="#com.intellij.ide.util.MemberChooser" timestamp="1622458481335">
+    <state x="414" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1622470786037">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="414" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1622470786037" />
+    <state x="765" y="256" key="#com.intellij.ide.util.MemberChooser" timestamp="1622467612888">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="612" y="205" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1621909475977" />
-    <state x="765" y="256" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1622458481335" />
+    <state x="765" y="256" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1622467612888" />
     <state x="547" y="456" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1622427914353">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="547" y="456" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1622427914353" />
-    <state width="762" height="646" key="DebuggerActiveHint" timestamp="1622449535833">
+    <state width="762" height="646" key="DebuggerActiveHint" timestamp="1622470088816">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="762" height="646" key="DebuggerActiveHint/0.0.1920.1080@0.0.1920.1080" timestamp="1622449535833" />
-    <state width="1877" height="322" key="GridCell.Tab.0.bottom" timestamp="1622461792575">
+    <state width="762" height="646" key="DebuggerActiveHint/0.0.1920.1080@0.0.1920.1080" timestamp="1622470088816" />
+    <state width="1877" height="322" key="GridCell.Tab.0.bottom" timestamp="1622471718319">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="249" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1621912287516" />
-    <state width="1877" height="322" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1622461792575" />
-    <state width="1877" height="322" key="GridCell.Tab.0.center" timestamp="1622461792575">
+    <state width="1877" height="322" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1622471718319" />
+    <state width="1877" height="322" key="GridCell.Tab.0.center" timestamp="1622471718319">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="249" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1621912287516" />
-    <state width="1877" height="322" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1622461792575" />
-    <state width="1877" height="322" key="GridCell.Tab.0.left" timestamp="1622461792574">
+    <state width="1877" height="322" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1622471718319" />
+    <state width="1877" height="322" key="GridCell.Tab.0.left" timestamp="1622471718319">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="249" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1621912287516" />
-    <state width="1877" height="322" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1622461792574" />
-    <state width="1877" height="322" key="GridCell.Tab.0.right" timestamp="1622461792575">
+    <state width="1877" height="322" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1622471718319" />
+    <state width="1877" height="322" key="GridCell.Tab.0.right" timestamp="1622471718319">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="249" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1621912287516" />
-    <state width="1877" height="322" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1622461792575" />
-    <state width="1877" height="444" key="GridCell.Tab.1.bottom" timestamp="1622461792550">
+    <state width="1877" height="322" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1622471718319" />
+    <state width="1877" height="444" key="GridCell.Tab.1.bottom" timestamp="1622471576238">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="395" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1621911740530" />
-    <state width="1877" height="444" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1622461792550" />
-    <state width="1877" height="444" key="GridCell.Tab.1.center" timestamp="1622461792549">
+    <state width="1877" height="444" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1622471576238" />
+    <state width="1877" height="444" key="GridCell.Tab.1.center" timestamp="1622471576238">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="395" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1621911740530" />
-    <state width="1877" height="444" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1622461792549" />
-    <state width="1877" height="444" key="GridCell.Tab.1.left" timestamp="1622461792549">
+    <state width="1877" height="444" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1622471576238" />
+    <state width="1877" height="444" key="GridCell.Tab.1.left" timestamp="1622471576238">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="395" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1621911740530" />
-    <state width="1877" height="444" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1622461792549" />
-    <state width="1877" height="444" key="GridCell.Tab.1.right" timestamp="1622461792549">
+    <state width="1877" height="444" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1622471576238" />
+    <state width="1877" height="444" key="GridCell.Tab.1.right" timestamp="1622471576238">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="395" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1621911740530" />
-    <state width="1877" height="444" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1622461792549" />
-    <state x="490" y="195" key="Maven.ArtifactSearchDialog" timestamp="1621858689572">
+    <state width="1877" height="444" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1622471576238" />
+    <state x="490" y="195" key="Maven.ArtifactSearchDialog" timestamp="1622467063370">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="490" y="195" key="Maven.ArtifactSearchDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1621858689572" />
+    <state x="490" y="195" key="Maven.ArtifactSearchDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1622467063370" />
     <state x="751" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1622274119540">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -261,14 +294,9 @@
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/serializer/KryoSerializer.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/server/ServerHandler.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="32" />
+          <url>file://$PROJECT_DIR$/rpc-core/src/main/java/com/imnoob/transport/netty/handler/RateLimitHandler.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="36" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
