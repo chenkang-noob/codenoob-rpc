@@ -7,6 +7,7 @@ public class WarningFactory {
     private static final ServiceLoader<Warning> loader = ServiceLoader.load(Warning.class);
 
     public static Warning getWarning(Class clazz) {
+        System.out.println(loader);
         for (Warning item : loader) {
             if (item.getClass().equals(clazz)) return item;
         }

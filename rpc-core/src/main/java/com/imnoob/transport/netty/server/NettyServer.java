@@ -13,6 +13,7 @@ import com.imnoob.transport.netty.enums.CustomizeException;
 import com.imnoob.transport.netty.exception.CommonException;
 import com.imnoob.transport.netty.handler.RateLimitHandler;
 import com.imnoob.transport.netty.provider.NacosProvider;
+import com.imnoob.transport.netty.serializer.CommonSerializer;
 import com.imnoob.transport.netty.serializer.JsonSerializer;
 import com.imnoob.transport.netty.serializer.KryoSerializer;
 import com.imnoob.transport.netty.serializer.ProtSerializer;
@@ -24,8 +25,7 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
+
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleStateHandler;
@@ -33,7 +33,7 @@ import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.reflect.misc.ReflectUtil;
+
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -47,15 +47,18 @@ public class NettyServer {
     private Integer port;
     private String serviceName;
     private String host;
+
     private NacosProvider nacosProvider;
+    private CommonSerializer serializer;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public NettyServer(String serviceName, String host,Integer port, NacosProvider nacosProvider) {
+    public NettyServer(String serviceName, String host,Integer port, NacosProvider nacosProvider,CommonSerializer serializer) {
         this.port = port;
         this.serviceName = serviceName;
         this.host = host;
         this.nacosProvider = nacosProvider;
+        this.serializer =serializer;
     }
 
     public NettyServer() {
@@ -63,6 +66,7 @@ public class NettyServer {
         this.serviceName = "rpc-provider";
         this.host = "127.0.0.1";
         nacosProvider = new NacosProvider("127.0.0.1",8848);
+        this.serializer =CommonSerializer.getSerializer( CommonSerializer.PROTOBUF_SERIALIZER);
     }
 
 
@@ -90,7 +94,7 @@ public class NettyServer {
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline();
                         pipeline.addLast("decoder",new CommonDecoder());
-                        pipeline.addLast("encoder",new CommonEncoder(new ProtSerializer()));
+                        pipeline.addLast("encoder",new CommonEncoder(serializer));
                         pipeline.addLast(new IdleStateHandler(60, 0, 0, TimeUnit.SECONDS));
                         pipeline.addLast(new ServerHandler());
                         //坑： netty handler的执行顺序
@@ -105,11 +109,11 @@ public class NettyServer {
                    if (future.isSuccess()){
                        logger.info("服务监听启动成功：" + port);
                        //           注册服务
-                       nacosProvider.registerService("rpc-provider",host,port);
+                       nacosProvider.registerService(serviceName,host,port);
                    }else {
                        logger.error("服务启动失败！");
                        //           删除服务
-                       nacosProvider.deregisterInstance("rpc-provider",host,port);
+                       nacosProvider.deregisterInstance(serviceName,host,port);
                    }
                }
            });
@@ -165,6 +169,7 @@ public class NettyServer {
                     Class<?>[] interfaces = next.getInterfaces();
                     for (Class<?> tmp : interfaces) {
                         if (rateAnno != null){
+                            //TODO 限流代理
                             ServiceCache.addService(tmp.getTypeName(), new RateLimitHandler().getProxy(next));
                         }else{
                             ServiceCache.addService(tmp.getTypeName(), next.newInstance());
@@ -174,8 +179,8 @@ public class NettyServer {
                 }else{
                     ServiceCache.addService(anno.value(), next.newInstance());
                 }
-                //TODO 限流代理
 
+                //TODO 限流代理
                 if (rateAnno != null && anno != null){
                     double limitNum = rateAnno.value();
                     int time = rateAnno.timeout();
