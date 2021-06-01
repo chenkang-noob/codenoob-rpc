@@ -15,6 +15,7 @@ import com.imnoob.transport.netty.handler.RateLimitHandler;
 import com.imnoob.transport.netty.provider.NacosProvider;
 import com.imnoob.transport.netty.serializer.JsonSerializer;
 import com.imnoob.transport.netty.serializer.KryoSerializer;
+import com.imnoob.transport.netty.serializer.ProtSerializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -89,7 +90,7 @@ public class NettyServer {
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline();
                         pipeline.addLast("decoder",new CommonDecoder());
-                        pipeline.addLast("encoder",new CommonEncoder(new KryoSerializer()));
+                        pipeline.addLast("encoder",new CommonEncoder(new ProtSerializer()));
                         pipeline.addLast(new IdleStateHandler(60, 0, 0, TimeUnit.SECONDS));
                         pipeline.addLast(new ServerHandler());
                         //坑： netty handler的执行顺序

@@ -25,7 +25,7 @@ public class RateLimitHandler implements MethodInterceptor {
 
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-        ConcurrentHashMap<String, RateLimiter> map = RateLimitCache.initMap();
+
         String name = method.getDeclaringClass().getName();
         RateLimiter rateLimit = RateLimitCache.getRateLimit(name);
         Object result = null;

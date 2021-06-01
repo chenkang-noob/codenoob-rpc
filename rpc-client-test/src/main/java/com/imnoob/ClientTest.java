@@ -15,22 +15,10 @@ public class ClientTest {
         ClientProxy proxy = new ClientProxy(nettyClient, "rpc-provider");
 
 
-        for (int i=0;i < 1;i++){
-           new Thread(new Runnable() {
-               @Override
-               public void run() {
-                   People rs = new People(18, "张三");
-                   HelloService service = proxy.getProxy(HelloService.class);
-                   People res = service.sayHello("hello");
-                   System.out.println(res);
-                   System.out.println("----------------------------");
-               }
-           }).start();
-        }
-
-//        ByeSerivce byeSerivce = proxy.getProxy(ByeSerivce.class);
-//        String s = byeSerivce.sayBye(rs);
-//        System.out.println(s);
+        People rs = new People(18,"张三");
+        ByeSerivce byeSerivce = proxy.getProxy(ByeSerivce.class);
+        String s = byeSerivce.sayBye(rs);
+        System.out.println(s);
 
 
     }
