@@ -15,6 +15,7 @@ public class RoundLoadBalance implements LoadBalance {
             instance = list.get(index);
         } else instance = list.get(index);
         index++;
+        if (index == Integer.MAX_VALUE) index = 0;
         return instance;
     }
 }

@@ -4,6 +4,7 @@ import com.google.common.util.concurrent.RateLimiter;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+@Deprecated
 public class RateLimitCache {
 
     private  static volatile ConcurrentHashMap<String, RateLimiter> rateLimitMap;

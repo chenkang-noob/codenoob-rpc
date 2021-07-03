@@ -5,18 +5,15 @@ import com.imnoob.transport.netty.Utils.PackageScanUtil;
 import com.imnoob.transport.netty.annotation.RateLimit;
 import com.imnoob.transport.netty.annotation.Service;
 import com.imnoob.transport.netty.annotation.ServiceScan;
-import com.imnoob.transport.netty.cache.RateLimitCache;
 import com.imnoob.transport.netty.cache.ServiceCache;
 import com.imnoob.transport.netty.codec.CommonDecoder;
 import com.imnoob.transport.netty.codec.CommonEncoder;
 import com.imnoob.transport.netty.enums.CustomizeException;
 import com.imnoob.transport.netty.exception.CommonException;
-import com.imnoob.transport.netty.handler.RateLimitHandler;
-import com.imnoob.transport.netty.provider.NacosProvider;
+import com.imnoob.transport.netty.handler.RateCGProxy;
+import com.imnoob.transport.netty.handler.RateProxy;
+import com.imnoob.transport.netty.provider.impl.NacosProvider;
 import com.imnoob.transport.netty.serializer.CommonSerializer;
-import com.imnoob.transport.netty.serializer.JsonSerializer;
-import com.imnoob.transport.netty.serializer.KryoSerializer;
-import com.imnoob.transport.netty.serializer.ProtSerializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -167,27 +164,41 @@ public class NettyServer {
             if (anno != null) {
                 if ("".equals(anno.value())){
                     Class<?>[] interfaces = next.getInterfaces();
-                    for (Class<?> tmp : interfaces) {
-                        if (rateAnno != null){
-                            //TODO 限流代理
-                            ServiceCache.addService(tmp.getTypeName(), new RateLimitHandler().getProxy(next));
-                        }else{
-                            ServiceCache.addService(tmp.getTypeName(), next.newInstance());
+                    Object o = null;
+                    if (rateAnno != null){
+                        //TODO 限流代理
+                        double limitNum = rateAnno.value();
+                        int time = rateAnno.timeout();
+                        TimeUnit timeUnit = rateAnno.timeUnit();
+                        RateLimiter rateLimiter = RateLimiter.create(limitNum, time, timeUnit);
+                        try {
+                            if (interfaces.length != 0)
+                                o = new RateProxy(next.newInstance(), rateLimiter).getProxy(next.getInterfaces()[0]);
+                            else //没有接口的情况下使用 cglib策略
+                                o = new RateCGProxy(rateLimiter).getProxy(next);
+                        }catch (Exception e){
+                            e.printStackTrace();
                         }
-
+                    }else{
+                         o = next.newInstance();
                     }
+
+                    for (Class<?> tmp : interfaces) {
+                        ServiceCache.addService(tmp.getTypeName(),o);
+                    }
+
                 }else{
                     ServiceCache.addService(anno.value(), next.newInstance());
                 }
 
                 //TODO 限流代理
-                if (rateAnno != null && anno != null){
-                    double limitNum = rateAnno.value();
-                    int time = rateAnno.timeout();
-                    TimeUnit timeUnit = rateAnno.timeUnit();
-                    RateLimiter rateLimiter = RateLimiter.create(limitNum, time, timeUnit);
-                    RateLimitCache.addRateLimit(next.getName(),rateLimiter);
-                }
+//                if (rateAnno != null && anno != null){
+//                    double limitNum = rateAnno.value();
+//                    int time = rateAnno.timeout();
+//                    TimeUnit timeUnit = rateAnno.timeUnit();
+//                    RateLimiter rateLimiter = RateLimiter.create(limitNum, time, timeUnit);
+//                    RateLimitCache.addRateLimit(next.getName(),rateLimiter);
+//                }
             }
         }
 

@@ -10,12 +10,20 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
-import java.util.concurrent.ConcurrentHashMap;
 
-public class RateLimitHandler implements MethodInterceptor {
+
+//cglib 动态代理
+public class RateCGProxy implements MethodInterceptor {
 
     private Enhancer enhancer = new Enhancer();
+    private final RateLimiter rateLimiter;
+
+    public RateCGProxy(RateLimiter rateLimiter) {
+        this.rateLimiter = rateLimiter;
+    }
+
     public Object getProxy(Class clazz){
+
         //设置需要创建子类的类
         enhancer.setSuperclass(clazz);
         enhancer.setCallback(this);
@@ -26,12 +34,10 @@ public class RateLimitHandler implements MethodInterceptor {
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
 
-        String name = method.getDeclaringClass().getName();
-        RateLimiter rateLimit = RateLimitCache.getRateLimit(name);
+
         Object result = null;
         try {
-
-            if (rateLimit.tryAcquire()) {
+            if (rateLimiter.tryAcquire()) {
                  result = methodProxy.invokeSuper(o, objects);
             }
         } catch (Throwable throwable) {

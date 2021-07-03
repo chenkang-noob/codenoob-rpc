@@ -3,7 +3,7 @@ package com.imnoob.transport.netty.loadbalance;
 import com.alibaba.nacos.api.naming.listener.NamingEvent;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.imnoob.transport.netty.model.RpcRequest;
-import com.imnoob.transport.netty.provider.NacosProvider;
+import com.imnoob.transport.netty.provider.impl.NacosProvider;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,16 +1,9 @@
 package com.imnoob.rpcApp;
 
-import com.imnoob.rpcApp.spi.Impl.MyWarning;
 import com.imnoob.transport.netty.annotation.ServiceScan;
-import com.imnoob.transport.netty.cache.RateLimitCache;
-import com.imnoob.transport.netty.cache.ServiceCache;
-import com.imnoob.transport.netty.provider.NacosProvider;
+import com.imnoob.transport.netty.provider.impl.NacosProvider;
 import com.imnoob.transport.netty.serializer.ProtSerializer;
 import com.imnoob.transport.netty.server.NettyServer;
-import com.imnoob.transport.netty.spi.Warning;
-import com.imnoob.transport.netty.spi.WarningFactory;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 @ServiceScan
 public class ServerApplication {
@@ -18,7 +11,6 @@ public class ServerApplication {
     public static void main(String[] args) {
         NacosProvider nacosProvider = new NacosProvider("127.0.0.1",8848);
         NettyServer nettyServer = new NettyServer("rpc-provider", "127.0.0.1", 9000, nacosProvider,new ProtSerializer());
-//        NettyServer nettyServer = new NettyServer();
         try {
             nettyServer.run();
         } catch (Exception e) {
@@ -26,7 +18,31 @@ public class ServerApplication {
         }
 
         //SPI 机制
-//        WarningFactory.getWarning(MyWarning.class);
+//        List<Object> instance = SpiFactory.getInstance(MyWarning.class);
+//        System.out.println(instance);
+//        List<Object> test = SpiFactory.getInstance(MySpiTest.class);
+//        System.out.println(test);
+
+//        RateLimiter rateLimiter = RateLimiter.create(1);
+//        for (int i=0 ; i < 5;i++){
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    for (int i=0; i <5;i++){
+//                        if (rateLimiter.tryAcquire()){
+//                            System.out.println("通过");
+//                            try {
+//                                Thread.sleep(100);
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }else{
+//                            System.out.println("拦截");
+//                        }
+//                    }
+//                }
+//            }).start();
+//        }
 
 
     }

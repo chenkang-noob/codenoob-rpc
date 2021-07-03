@@ -20,7 +20,6 @@ public class CommonDecoder extends ReplayingDecoder<Void> {
 
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
-        //TODO 读取 魔数  包类型 序列化类型 数据
         int num = byteBuf.readInt();
         if (num != RpcConstant.MAGIC_NUM){
             logger.error("协议魔数错误");
